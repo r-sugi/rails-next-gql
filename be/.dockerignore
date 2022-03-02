@@ -1,0 +1,5 @@
+# TODO: 一旦入れておく。不要なら消す
+.bundle
+log
+tmp
+vendor/bundle
