@@ -21,4 +21,14 @@ Things you may want to cover:
 
 * Deployment instructions
 
-* ...
+* How to add / remove gem
+init Gemfile & bundle install in container
+```
+$ rm Gemfile.lock
+$ touch Gemfile.lock
+$ docker-compose run <container_name> bundle install
+```
+build
+```
+$ docker-compose build <container_name>
+```
