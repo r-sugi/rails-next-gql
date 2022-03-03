@@ -32,3 +32,9 @@ build
 ```
 $ docker-compose build <container_name>
 ```
+
+* generate gql types
+[graphql-ruby/GraphQL/RakeTask](https://www.rubydoc.info/github/rmosolgo/graphql-ruby/GraphQL/RakeTask)
+```
+$ bin/rake graphql:schema:dump
+```

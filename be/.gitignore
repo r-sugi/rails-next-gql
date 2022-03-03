@@ -28,3 +28,7 @@
 
 # Ignore vendor
 /vendor/*
+
+# Ignore gql code gen
+schema.graphql
+schema.json
