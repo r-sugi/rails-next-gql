@@ -1,0 +1,7 @@
+inherit_gem:
+  rubocop-discourse: default.yml
+AllCops:
+  TargetRubyVersion: 3.0
+  Exclude:
+    - 'Gemfile.lock'
+    - 'vendor/**/*'

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 Rails.application.routes.draw do
   # FIXME: only for graphiql IDE on development
   if Rails.env.development?
