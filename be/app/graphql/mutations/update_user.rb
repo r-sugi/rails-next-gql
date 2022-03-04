@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Mutations
   class UpdateUser < BaseMutation
     field :user, Types::UserType, null: true
