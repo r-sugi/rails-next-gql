@@ -1,5 +1,12 @@
 ## Getting Started
 
+### versions
+
+```
+node v14.17.0
+yarn v1.22.17
+```
+
 ### vscode
 
 - add vscode extensions
