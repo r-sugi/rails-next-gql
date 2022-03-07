@@ -1,5 +1,5 @@
 import { VFC } from 'react'
-import { userVar } from '@@/cache'
+import { userVar } from '../cache'
 import { useReactiveVar } from '@apollo/client'
 import Link from 'next/link'
 
