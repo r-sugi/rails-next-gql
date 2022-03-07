@@ -20,7 +20,13 @@ yarn v1.22.17
 
 ### run dev server
 
-First, run the development server:
+1. generate types from schema:
+
+```bash
+yarn gen-types
+```
+
+2. run the development server:
 
 ```bash
 yarn dev

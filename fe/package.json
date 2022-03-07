@@ -3,14 +3,20 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -p 8080",
     "build": "next build",
-    "start": "next start",
+    "start": "next start -p 8080",
     "lint": "next lint",
-    "test": "jest --env=jsdom --verbose"
+    "test": "jest --env=jsdom --verbose",
+    "gen-types": "graphql-codegen --config codegen.yml"
   },
   "dependencies": {
+    "@apollo/client": "^3.5.10",
+    "@apollo/react-hooks": "^4.0.0",
+    "@heroicons/react": "^1.0.6",
     "autoprefixer": "^10.4.2",
+    "cross-fetch": "^3.1.5",
+    "graphql": "^16.3.0",
     "next": "11.1.2",
     "postcss": "^8.4.7",
     "react": "17.0.2",
@@ -19,6 +25,10 @@
   },
   "devDependencies": {
     "@babel/core": "^7.17.5",
+    "@graphql-codegen/cli": "2.6.2",
+    "@graphql-codegen/typescript": "^2.4.5",
+    "@graphql-codegen/typescript-operations": "2.3.2",
+    "@graphql-codegen/typescript-react-apollo": "3.2.8",
     "@testing-library/dom": "^8.11.3",
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^12.1.3",
