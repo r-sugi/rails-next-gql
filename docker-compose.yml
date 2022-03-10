@@ -1,26 +1,34 @@
 version: '3'
 services:
-  gql-server: # Ruby on Railsが起動するコンテナ
-    container_name: gql-server
-    build: .
+  fe:
+    build: ./fe
+    ports:
+      - "8080:8080"
+    container_name: fe
+    volumes:
+      - ./fe:/fe # アプリケーションファイルの同期
+      - /fe/node_modules
+    command: yarn run dev
+  api: # Ruby on Railsが起動するコンテナ
+    container_name: api
+    build: ./be
     command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
     ports:
       - '3000:3000' # localhostの3000ポートでアクセスできるようにする
     volumes:
-      - .:/be # アプリケーションファイルの同期
+      - ./be:/be # アプリケーションファイルの同期
     depends_on:
       - db
     stdin_open: true
     tty: true
   db: # MySQLが起動するコンテナ
     container_name: db
-    platform: linux/x86_64 # M1チップ対応のため追記
+    platform: linux/x86_64 # M1 Mac OS
     image: mysql:8.0
     volumes:
-      # - mysql-data:/var/lib/mysql # データの永続化
       - mysql_data:/var/lib/mysql
       - ./mysql/config:/etc/mysql/conf.d/my.cnf
-    command: --default-authentication-plugin=mysql_native_password # 認証方式を8系以前のものにする。
+    command: --default-authentication-plugin=mysql_native_password # 認証方式(8系以前)
     ports:
       - 3306:3306
     environment:
