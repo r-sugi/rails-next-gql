@@ -7,6 +7,7 @@ services:
     container_name: fe
     volumes:
       - ./fe:/fe # アプリケーションファイルの同期
+      - /fe/node_modules
     command: yarn run dev
   api: # Ruby on Railsが起動するコンテナ
     container_name: api
