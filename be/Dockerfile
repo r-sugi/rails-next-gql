@@ -1,7 +1,6 @@
 FROM ruby:3.0.3
 
 # ディレクトリ・ファイルの作成
-# RUN mkdir /be
 WORKDIR /be
 COPY Gemfile /be/Gemfile
 COPY Gemfile.lock /be/Gemfile.lock
