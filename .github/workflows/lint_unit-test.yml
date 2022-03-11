@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      # FE
+      # FE DO WITHOUT docker container
       - uses: actions/setup-node@v2
         with:
           node-version: 14.x
@@ -57,12 +57,12 @@ jobs:
                     "value": "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
                   }
                 ]
-
   BE_lint_test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       # TODO:
+      # BE DO WITH docker container
       # - name: Setup docker
       #   shell: bash
       #   run: |
@@ -77,10 +77,10 @@ jobs:
       #     docker-compose run app bundle exec rspec
       #   env:
       #     RAILS_ENV: test
+
   notify:
     runs-on: ubuntu-latest
     needs: [FE_lint_test, BE_lint_test]
-    # needs: [FE_lint_unit-test, Build2]
 
     steps:
       - name: Checkout
@@ -91,7 +91,7 @@ jobs:
         env:
           INCOMING_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
         with:
-          text: Successfully TOPIC_BRANCH lint,test
+          text: Successfully TOPIC_BRANCH FE/BE lint,test
           attachments: |
             [
               {
