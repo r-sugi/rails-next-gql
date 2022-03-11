@@ -1,4 +1,4 @@
-name: lint_unit-test
+name: TOPIC_BRANCH_lint_unit-test
 
 on:
   pull_request:
@@ -7,10 +7,11 @@ on:
       - 'main' # master に対してPR作成した時(例: issues/xxx)
 
 jobs:
-  lint_unit-test:
+  FE_lint_unit-test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      # FE
       - uses: actions/setup-node@v2
         with:
           node-version: 14.x
@@ -35,7 +36,7 @@ jobs:
         env:
           INCOMING_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
         with:
-          text: failed STG test & build
+          text: failed TOPIC_BRANCH lint,test
           attachments: |
             [
               {
@@ -71,7 +72,7 @@ jobs:
         env:
           INCOMING_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
         with:
-          text: Successfully lint, test
+          text: Successfully TOPIC_BRANCH lint,test
           attachments: |
             [
               {
