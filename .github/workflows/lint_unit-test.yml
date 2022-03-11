@@ -67,24 +67,24 @@ jobs:
         run: |
           docker-compose build api
           docker-compose run api bundle install
-          docker-compose run api bin/rails db:create
-          docker-compose run api bin/rails db:migrate
-        env:
-          RAILS_ENV: test
+          docker-compose run api bin/rails db:create RAILS_ENV=test
+          docker-compose run api bin/rails db:migrate RAILS_ENV=test
+        # env:
+        #   RAILS_ENV: test
 
       - name: Run Rubocop
         shell: bash
         run:  |
           docker-compose run api bundle exec rubocop
-        env:
-          RAILS_ENV: test
+        # env:
+        #   RAILS_ENV: test
 
       - name: Run RSpec
         shell: bash
         run:  |
-          docker-compose run app bundle exec rspec
-        env:
-          RAILS_ENV: test
+          docker-compose run app bundle exec rspec RAILS_ENV=test
+        # env:
+        #   RAILS_ENV: test
 
   notify:
     runs-on: ubuntu-latest
