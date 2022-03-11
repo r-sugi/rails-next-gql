@@ -38,5 +38,19 @@ module Be
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
+
+    config.generators do |g|
+      g.stylesheets false
+      g.assets false
+      g.template_engine false
+
+      g.test_framework :rspec,
+            request_spec: true,
+            model_spec: true,
+            view_specs: false,
+            helper_specs: false,
+            controller_specs: false,
+            routing_specs: false
+    end
   end
 end
