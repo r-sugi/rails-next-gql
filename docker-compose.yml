@@ -20,6 +20,7 @@ services:
       - ./be:/be # アプリケーションファイルの同期
     depends_on:
       - db
+      - test-db
     stdin_open: true
     tty: true
 
@@ -39,7 +40,7 @@ services:
       MYSQL_DATABASE: 'be_development'
 
   test-db: # MySQLが起動するコンテナ
-    container_name: db
+    container_name: test-db
     platform: linux/x86_64 # M1 Mac OS
     image: mysql:8.0
     volumes:
