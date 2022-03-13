@@ -65,26 +65,26 @@ jobs:
       - name: Setup docker
         shell: bash
         run: |
-          docker-compose build --no-cache api
-          docker-compose run api bundle install
-          docker-compose run api bin/rails db:create RAILS_ENV=test
-          docker-compose run api bin/rails db:migrate RAILS_ENV=test
-        # env:
-        #   RAILS_ENV: test
-
+          docker-compose build api
+      - name: Setup bundle
+        shell: bash
+        run: |
+          docker-compose run api bundle install  --jobs 4 --without production
+      - name: Setup Rails db
+        shell: bash
+        run:  |
+          docker-compose run api bin/rails db:create
+          docker-compose run api bin/rails db:migrate
+        env:
+          RAILS_ENV: test
       - name: Run Rubocop
         shell: bash
         run:  |
           docker-compose run api bundle exec rubocop
-        # env:
-        #   RAILS_ENV: test
-
       - name: Run RSpec
         shell: bash
         run:  |
-          docker-compose run app bundle exec rspec RAILS_ENV=test
-        # env:
-        #   RAILS_ENV: test
+          docker-compose run api bundle exec rspec
 
   notify:
     runs-on: ubuntu-latest
