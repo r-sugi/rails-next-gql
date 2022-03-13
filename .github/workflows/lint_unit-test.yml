@@ -69,10 +69,13 @@ jobs:
       - name: Setup bundle
         shell: bash
         run: |
-          docker-compose run api bundle install  --jobs 4 --without production
+          docker-compose run api bundle install --jobs 4 --without production
+      # debug
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
       - name: Setup Rails db
         shell: bash
-        run:  |
+        run: |
           docker-compose run api bin/rails db:create RAILS_ENV=test
           docker-compose run api bin/rails db:migrate RAILS_ENV=test
       - name: Run Rubocop
