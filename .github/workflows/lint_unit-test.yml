@@ -59,6 +59,7 @@ jobs:
   #               ]
   BE_lint_test:
     runs-on: ubuntu-latest
+    timeout-minutes: 10 # job全体
     steps:
       - uses: actions/checkout@v2
       # BE DO WITH docker container
@@ -70,10 +71,6 @@ jobs:
         shell: bash
         run: |
           docker-compose run api bundle install --jobs 4 --without production
-      # debug
-      - name: Debug
-        if: ${{ always() }}
-        uses: mxschmitt/action-tmate@v3
       - name: Setup Rails db
         shell: bash
         run: |
