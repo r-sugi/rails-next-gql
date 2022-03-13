@@ -73,10 +73,8 @@ jobs:
       - name: Setup Rails db
         shell: bash
         run:  |
-          docker-compose run api bin/rails db:create
-          docker-compose run api bin/rails db:migrate
-        env:
-          RAILS_ENV: test
+          docker-compose run api bin/rails db:create RAILS_ENV=test
+          docker-compose run api bin/rails db:migrate RAILS_ENV=test
       - name: Run Rubocop
         shell: bash
         run:  |
