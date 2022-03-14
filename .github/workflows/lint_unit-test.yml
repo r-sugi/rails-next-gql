@@ -71,6 +71,10 @@ jobs:
         shell: bash
         run: |
           docker-compose run api bundle install --jobs 4 --without production
+      - name: debug
+        shell: bash
+        run: |
+          docker-compose ps
       - name: Setup Rails db
         shell: bash
         run: |
