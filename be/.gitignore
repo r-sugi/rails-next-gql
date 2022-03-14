@@ -36,3 +36,9 @@ schema.json
 # rails-erd
 *.dot
 erd.png
+
+# test coverage report
+/coverage
+
+# Ignore DS_Store
+.DS_Store
