@@ -74,7 +74,7 @@ jobs:
       - name: debug1
         shell: bash
         run: |
-          docker-compose up db
+          docker-compose build db
       - name: debug2
         shell: bash
         run: |
