@@ -182,6 +182,9 @@ GEM
     rubocop-discourse (2.5.0)
       rubocop (>= 1.1.0)
       rubocop-rspec (>= 2.0.0)
+    rubocop-performance (1.13.3)
+      rubocop (>= 1.7.0, < 2.0)
+      rubocop-ast (>= 0.4.0)
     rubocop-rails (2.13.2)
       activesupport (>= 4.2.0)
       rack (>= 1.1)
@@ -226,6 +229,7 @@ DEPENDENCIES
   rspec-rails
   rubocop
   rubocop-discourse
+  rubocop-performance
   rubocop-rails
   sprockets (~> 3)
   tzinfo-data

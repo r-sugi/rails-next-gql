@@ -1,4 +1,6 @@
-require: rubocop-rails
+require:
+  - rubocop-rails
+  - rubocop-performance
 Rails:
   Enabled: true
 inherit_gem:
