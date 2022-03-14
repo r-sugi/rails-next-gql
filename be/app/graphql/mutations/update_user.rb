@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 module Mutations
   class UpdateUser < BaseMutation
-    field :user, Types::UserType, null: true
+    field :user, Types::UserType, null: false
 
     argument :id, ID, required: true
     argument :name, String, required: true
