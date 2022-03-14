@@ -79,9 +79,6 @@ jobs:
         shell: bash
         run: |
           docker-compose ps
-      - name: debug3
-        shell: bash
-        run: mysql --protocol=tcp -h localhost -P 3306 -u root -proot_password -e "root"
       - name: Setup Rails db
         shell: bash
         run: |
