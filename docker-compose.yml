@@ -9,6 +9,7 @@ services:
       - ./fe:/fe # アプリケーションファイルの同期
       - /fe/node_modules
     command: yarn run dev
+
   api: # Ruby on Railsが起動するコンテナ
     container_name: api
     build: ./be
@@ -21,6 +22,7 @@ services:
       - db
     stdin_open: true
     tty: true
+
   db: # MySQLが起動するコンテナ
     container_name: db
     platform: linux/x86_64 # M1 Mac OS
@@ -32,9 +34,11 @@ services:
     ports:
       - 3306:3306
     environment:
+      MYSQL_USER: user
+      MYSQL_PASSWORD: root
       MYSQL_ROOT_PASSWORD: root
       TZ: 'Asia/Tokyo'
-      # MYSQL_DATABASE: 'be_development'
+
 volumes:
   mysql_data:
     driver: local

@@ -1,5 +1,6 @@
 import { ReactNode, VFC } from 'react'
 import Head from 'next/head'
+import Image from 'next/image'
 import Link from 'next/link'
 
 interface Props {
@@ -83,7 +84,7 @@ export const Layout: VFC<Props> = ({
           rel="noopener noreferrer"
         >
           Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className="h-4 ml-2" />
+          <Image src="/vercel.svg" alt="Vercel Logo" className="h-4 ml-2" width="100%" height="100%" />
         </a>
       </footer>
     </div>
