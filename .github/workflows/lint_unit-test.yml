@@ -71,7 +71,11 @@ jobs:
         shell: bash
         run: |
           docker-compose run api bundle install --jobs 4 --without production
-      - name: debug
+      - name: debug1
+        shell: bash
+        run: |
+          docker-compose up db
+      - name: debug2
         shell: bash
         run: |
           docker-compose ps
