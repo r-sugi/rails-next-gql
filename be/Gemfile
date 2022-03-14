@@ -47,6 +47,7 @@ group :development do
   gem 'sprockets', '~> 3'
   # for graphiql IDE
   gem 'graphiql-rails'
+  gem 'brakeman'
 end
 
 group :test do
