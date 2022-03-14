@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'rails_helper'
 
 RSpec.describe 'CreateUser', type: :request do
@@ -8,7 +9,7 @@ RSpec.describe 'CreateUser', type: :request do
         email: 'sample1@gmail.com'
       }
 
-      mutation = Mutations::CreateUser.new(field: nil, object: nil, context:{})
+      mutation = Mutations::CreateUser.new(field: nil, object: nil, context: {})
       res = mutation.resolve(
         name: create_user_params[:name],
         email: create_user_params[:email]
