@@ -1,7 +1,7 @@
-.bundle
+Dockerfile
+node_modules
 log/*
 tmp/*
-vendor/bundle
 Dockerfile
 .dockerignore
 .git
