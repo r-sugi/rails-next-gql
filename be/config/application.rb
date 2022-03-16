@@ -25,6 +25,10 @@ module Be
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.0
+    # timezone
+    config.time_zone = "Tokyo"
+    # active record timezone
+    config.active_record.default_timezone = :local
 
     # FIXME: only for graphiql IDE on development
     config.middleware.use Rack::MethodOverride
