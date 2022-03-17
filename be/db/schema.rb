@@ -10,11 +10,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_17_103944) do
+ActiveRecord::Schema.define(version: 2022_03_17_154236) do
 
   create_table "bank_accounts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.decimal "balance", precision: 19, scale: 4, null: false
     t.string "currency", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "photo_taggings", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "photo_id"
+    t.bigint "tag_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["photo_id", "tag_id"], name: "index_photo_taggings_on_photo_id_and_tag_id", unique: true
+    t.index ["photo_id"], name: "index_photo_taggings_on_photo_id"
+    t.index ["tag_id"], name: "index_photo_taggings_on_tag_id"
+  end
+
+  create_table "photos", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "tags", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -30,4 +51,6 @@ ActiveRecord::Schema.define(version: 2022_03_17_103944) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "photo_taggings", "photos"
+  add_foreign_key "photo_taggings", "tags"
 end
