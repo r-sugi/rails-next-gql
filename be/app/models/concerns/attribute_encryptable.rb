@@ -8,9 +8,9 @@ module AttributeEncryptable
     end
 
     def self.encryptor
-      @encryptor ||= Rails.application.key_generator
-        .generate_key("attribute encryptor", ActiveSupport::MessageEncryptor.key_len)
-        .then { |key| ActiveSupport::MessageEncryptor.new(key, serializer: JSON) }
+      @encryptor ||= Rails.application.key_generator.
+                       generate_key("attribute encryptor", ActiveSupport::MessageEncryptor.key_len).
+                       then {|key| ActiveSupport::MessageEncryptor.new(key, serializer: JSON) }
     end
 
     def after_save(record)

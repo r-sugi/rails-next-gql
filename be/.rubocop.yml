@@ -1,8 +1,7 @@
 require:
   - rubocop-rails
   - rubocop-performance
-Rails:
-  Enabled: true
+  - rubocop-rspec
 inherit_gem:
   rubocop-discourse: default.yml
 AllCops:
@@ -12,3 +11,74 @@ AllCops:
     - 'Gemfile.lock'
     - 'vendor/**/*'
     - 'db/schema.rb'
+
+#################### Layout ################################
+# メソッドチェーンの改行は末尾に . を入れる
+# * REPL に貼り付けた際の暴発を防ぐため
+# * 途中にコメントをはさむことができて実用上圧倒的に便利
+Layout/DotPosition:
+  EnforcedStyle: trailing
+
+# 桁揃えが綺麗にならないことが多いので migration は除外
+Layout/ExtraSpacing:
+  Exclude:
+    - "db/migrate/*.rb"
+
+# special_inside_parentheses (default) と比べて
+# * 横に長くなりづらい
+# * メソッド名の長さが変わったときに diff が少ない
+Layout/FirstArrayElementIndentation:
+  EnforcedStyle: consistent
+
+# private/protected は一段深くインデントする
+Layout/IndentationConsistency:
+  EnforcedStyle: indented_internal_methods
+
+# メソッドチェーン感がより感じられるインデントにする
+Layout/MultilineMethodCallIndentation:
+  EnforcedStyle: indented_relative_to_receiver
+
+# {} は 1 行で書くときに主に使われるので、スペースよりも
+# 横に長くならない方が嬉しさが多い。
+Layout/SpaceInsideBlockBraces:
+  SpaceBeforeBlockParameters: false
+
+# * 同名のメソッドがある場合にローカル変数に `_` を付ける
+# * 一時変数として `_` を付ける
+# というテクニックは頻出する
+Lint/UnderscorePrefixedVariableName:
+  Enabled: false
+
+Lint/Void:
+  CheckForMethodsWithNoSideEffects: true
+
+############### Rails ##################
+Rails:
+  Enabled: true
+
+# 意図しないN+1を防止
+Rails/Delegate:
+  Enabled: false
+
+Rails/Exit:
+  Enabled: false
+
+Rails/FilePath:
+  Enabled: false
+
+Rails/PluralizationGrammar:
+  Enabled: false
+
+############### RSpec ##################
+# subject はコピペ可搬性よりもそのまま USAGE であって欲しい
+RSpec/DescribedClass:
+  EnforcedStyle: explicit
+
+RSpec/EmptyLineAfterFinalLet:
+  Enabled: false
+
+# each で回したり aggregate_failures 使ってたりすると厳しい。
+# feature spec は exclude でも良いかもしれない。
+# ヒアドキュメント使うと一瞬で超えるので disable も検討。
+RSpec/ExampleLength:
+  Max: 8
