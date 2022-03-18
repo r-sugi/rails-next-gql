@@ -3,7 +3,7 @@ class Money
   include Comparable
 
   attr_reader :amount, :currency
-  alias eql? ==
+  alias_method :eql?, :==
 
   def initialize(amount, currency = :JPY)
     @amount = BigDecimal(amount)

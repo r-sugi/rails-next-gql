@@ -25,7 +25,7 @@ class UserRegistrationForm
 
   private
 
-  def email_is_not_taken_by_another
-    errors.add(:email, :taken, value: email) if User.exists?(email: email)
-  end
+    def email_is_not_taken_by_another
+      errors.add(:email, :taken, value: email) if User.exists?(email: email)
+    end
 end

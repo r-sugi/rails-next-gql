@@ -13,9 +13,9 @@ module Taggable
     def tagged_with(tag, *others, any: false)
       tags = [tag, *others]
 
-      joins(:tags)
-        .merge(reflect_on_association(:tags).klass.with_name(tags))
-        .merge(
+      joins(:tags).
+        merge(reflect_on_association(:tags).klass.with_name(tags)).
+        merge(
           if tags.size == 1
             all
           elsif any

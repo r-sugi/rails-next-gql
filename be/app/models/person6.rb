@@ -9,7 +9,7 @@ class Person6
 
   private
 
-  def normalize_name
-    self.name = name.downcase.titleize
-  end
+    def normalize_name
+      self.name = name.downcase.titleize
+    end
 end

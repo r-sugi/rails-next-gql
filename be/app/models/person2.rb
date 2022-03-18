@@ -15,9 +15,9 @@ class Person2
 
   private
 
-  def record_timestamps
-    current_time = Time.current
-    self.created_at ||= current_time
-    self.updated_at ||= current_time
-  end
+    def record_timestamps
+      current_time = Time.current
+      self.created_at ||= current_time
+      self.updated_at ||= current_time
+    end
 end
