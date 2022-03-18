@@ -1,12 +1,12 @@
 # frozen_string_literal: true
-require 'rails_helper'
+require "rails_helper"
 
-RSpec.describe 'CreateUser', type: :request do
-  describe 'resolver' do
-    it 'userが作成されること' do
+RSpec.describe "CreateUser", type: :request do
+  describe "resolver" do
+    it "userが作成されること" do
       create_user_params = {
-        name: 'hoge',
-        email: 'sample1@gmail.com'
+        name: "hoge",
+        email: "sample1@gmail.com"
       }
 
       mutation = Mutations::CreateUser.new(field: nil, object: nil, context: {})

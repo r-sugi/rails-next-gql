@@ -10,7 +10,7 @@ class PhoneNumber
   def ==(other)
     self.class == other.class && value == other.value
   end
-  alias eql? ==
+  alias_method :eql?, :==
 
   def mobile?
     @value.match?(/\A0\d{10}\z/)
