@@ -10,8 +10,7 @@ class GraphqlController < ApplicationController
     query = params[:query]
     operation_name = params[:operationName]
     context = {
-      session: session,
-      current_user: current_user,
+      current_user: current_user
     }
     result = BeSchema.execute(query, variables: variables, context: context, operation_name: operation_name)
     render json: result
@@ -42,17 +41,24 @@ class GraphqlController < ApplicationController
       end
     end
 
-    # gets current user from token stored in the session
     def current_user
-      # if we want to change the sign-in strategy, this is the place to do it
-      return unless session[:token]
+      if auth_present?
+        User.find(auth["user"])
+      end
+      rescue ActiveSupport::MessageVerifier::InvalidSignature
+        nil
+    end
 
-      crypt = ActiveSupport::MessageEncryptor.new(Rails.application.credentials.secret_key_base.byteslice(0..31))
-      token = crypt.decrypt_and_verify session[:token]
-      user_id = token.gsub("user-id:", "").to_i
-      User.find user_id
-    rescue ActiveSupport::MessageVerifier::InvalidSignature
-      nil
+    def auth_present?
+      !!request.env.fetch("HTTP_AUTHORIZATION", "").scan(/Bearer/).flatten.first
+    end
+
+    def token
+      request.env["HTTP_AUTHORIZATION"].scan(/Bearer (.*)$/).flatten.last
+    end
+
+    def auth
+      Auth.decode(token)
     end
 
     def handle_error_in_development(e)
