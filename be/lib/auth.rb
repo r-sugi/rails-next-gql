@@ -19,8 +19,6 @@ class Auth
   end
 
   def self.auth_secret
-    "AUTH_SECRET"
-    # TODO: 環境変数
-    # ENV["AUTH_SECRET"]
+    ENV["AUTH_SECRET"]
   end
 end

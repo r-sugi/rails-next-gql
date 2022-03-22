@@ -45,6 +45,8 @@ module Be
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
 
+    Dotenv::Railtie.load
+
     config.generators do |g|
       g.stylesheets false
       g.assets false

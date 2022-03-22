@@ -42,3 +42,7 @@ erd.png
 
 # Ignore DS_Store
 .DS_Store
+
+# dot-env
+.env
+.env.*
