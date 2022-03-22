@@ -1,11 +1,5 @@
 # frozen_string_literal: true
 class ApplicationController < ActionController::API
-  # before_action :authenticate
-
-  # def logged_in?
-  #   !!current_user
-  # end
-
   def current_user
     if auth_present?
       user = User.find(auth["user"])
@@ -14,10 +8,6 @@ class ApplicationController < ActionController::API
       end
     end
   end
-
-  # def authenticate
-  #   render json: {error: "unauthorized"}, status: 401 unless logged_in?
-  # end
 
   private
     def token
