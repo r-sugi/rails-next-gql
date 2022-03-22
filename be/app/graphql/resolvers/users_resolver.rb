@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 module Resolvers
-  class UsersResolver < GraphQL::Schema::Resolver
+  class UsersResolver < LoginRequiredResolver
     type [Types::UserType], null: false
 
     def resolve

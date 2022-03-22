@@ -25,6 +25,8 @@ module Be
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.0
+    config.autoload_paths << Rails.root.join("lib")
+
     # timezone
     config.time_zone = "Tokyo"
     # active record timezone
@@ -42,6 +44,8 @@ module Be
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
+
+    Dotenv::Railtie.load
 
     config.generators do |g|
       g.stylesheets false

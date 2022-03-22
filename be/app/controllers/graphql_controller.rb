@@ -10,8 +10,7 @@ class GraphqlController < ApplicationController
     query = params[:query]
     operation_name = params[:operationName]
     context = {
-      # Query context goes here, for example:
-      # current_user: current_user,
+      current_user: current_user
     }
     result = BeSchema.execute(query, variables: variables, context: context, operation_name: operation_name)
     render json: result
@@ -40,6 +39,26 @@ class GraphqlController < ApplicationController
       else
         raise ArgumentError, "Unexpected parameter: #{variables_param}"
       end
+    end
+
+    def current_user
+      if auth_present?
+        User.find(auth["user"])
+      end
+      rescue ActiveSupport::MessageVerifier::InvalidSignature
+        nil
+    end
+
+    def auth_present?
+      !!request.env.fetch("HTTP_AUTHORIZATION", "").scan(/Bearer/).flatten.first
+    end
+
+    def token
+      request.env["HTTP_AUTHORIZATION"].scan(/Bearer (.*)$/).flatten.last
+    end
+
+    def auth
+      Auth.decode(token)
     end
 
     def handle_error_in_development(e)
