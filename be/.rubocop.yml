@@ -12,6 +12,10 @@ AllCops:
     - 'vendor/**/*'
     - 'db/schema.rb'
 
+#################### Discourse ################################
+Discourse/NoAddReferenceOrAliasesActiveRecordMigration:
+  Enabled: false
+
 #################### Layout ################################
 # メソッドチェーンの改行は末尾に . を入れる
 # * REPL に貼り付けた際の暴発を防ぐため

@@ -2,7 +2,7 @@
 require "rails_helper"
 
 RSpec.describe "UpdateUser", type: :request do
-  describe "resolver" do
+  xdescribe "resolver" do
     it "userが作成されること" do
       user = create(:user)
       create_user_params = {
