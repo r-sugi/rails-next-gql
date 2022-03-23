@@ -9,5 +9,6 @@ module Types
     # They will be entry points for queries on your schema.
 
     field :users, resolver: Resolvers::UsersResolver
+    field :all_links, resolver: Resolvers::LinksSearch
   end
 end
