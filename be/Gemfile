@@ -54,7 +54,7 @@ group :development do
   gem "rubocop-performance"
   gem "rubocop-discourse"
   # for graphiql IDE
-  gem "sprockets", "~> 3"
+  gem "sprockets", "~> 4"
   # for graphiql IDE
   gem "graphiql-rails"
   gem "brakeman"
