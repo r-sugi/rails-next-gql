@@ -21,6 +21,8 @@ module Resolvers
 
     # when "filter" is passed "apply_filter" would be called to narrow the scope
     option :filter, type: LinkFilter, with: :apply_filter
+    option :limit, type: Integer, with: :apply_limit
+    option :offset, type: Integer, with: :apply_offset
 
     # apply_filter recursively loops through "OR" branches
     def apply_filter(scope, value)
@@ -38,6 +40,14 @@ module Resolvers
       value[:OR].reduce(branches) {|s, v| normalize_filters(v, s) } if value[:OR].present?
 
       branches
+    end
+
+    def apply_limit(scope, value)
+      scope.limit(value)
+    end
+
+    def apply_offset(scope, value)
+      scope.offset(value)
     end
   end
 end
