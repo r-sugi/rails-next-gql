@@ -8,5 +8,9 @@ module Types
     field :links, [LinkType], null: false
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
+
+    def links
+      Loaders::AssociationLoader.for(User, :links).load(object)
+    end
   end
 end

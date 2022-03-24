@@ -8,7 +8,7 @@ module Types
     # Add root-level fields here.
     # They will be entry points for queries on your schema.
 
-    field :users, resolver: Resolvers::UsersResolver
+    field :all_users, resolver: Resolvers::UsersResolver
     field :all_links, resolver: Resolvers::LinksSearch
   end
 end
