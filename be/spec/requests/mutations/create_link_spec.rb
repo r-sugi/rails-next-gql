@@ -20,5 +20,16 @@ RSpec.describe "CreateLink", type: :request do
       assert_equal link.description, "description"
       assert_equal link.url, "http://example.com"
     end
+
+    it "failure because no credentials" do
+      res = perform(
+        url: "",
+        description: "",
+        user: user
+      )
+      expect(res.message).to include("Url can't be blank")
+      expect(res.message).to include("Description can't be blank")
+      expect(res.message).to include("Description is too short (minimum is 3 characters)")
+    end
   end
 end
