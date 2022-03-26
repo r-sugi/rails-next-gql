@@ -1,17 +1,6 @@
 # frozen_string_literal: true
 class GraphqlController < ApplicationController
-  # If accessing from outside this domain, nullify the session
-  # This allows for outside API access while preventing CSRF attacks,
-  # but you'll have to authenticate your user separately
-  # protect_from_forgery with: :null_session
-
   def execute
-    variables = prepare_variables(params[:variables])
-    query = params[:query]
-    operation_name = params[:operationName]
-    context = {
-      current_user: current_user
-    }
     result = BeSchema.execute(query, variables: variables, context: context, operation_name: operation_name)
     render json: result
   rescue StandardError => e
@@ -20,6 +9,17 @@ class GraphqlController < ApplicationController
   end
 
   private
+    def query
+      params[:query]
+    end
+
+    def variables
+      prepare_variables params[:variables]
+    end
+
+    def operation_name
+      params[:operationName]
+    end
 
     # Handle variables in form data, JSON body, or a blank value
     def prepare_variables(variables_param)
@@ -41,24 +41,12 @@ class GraphqlController < ApplicationController
       end
     end
 
-    def current_user
-      if auth_present?
-        User.find(auth["user"])
-      end
-      rescue ActiveSupport::MessageVerifier::InvalidSignature
-        nil
-    end
-
-    def auth_present?
-      !!request.env.fetch("HTTP_AUTHORIZATION", "").scan(/Bearer/).flatten.first
-    end
-
-    def token
-      request.env["HTTP_AUTHORIZATION"].scan(/Bearer (.*)$/).flatten.last
-    end
-
-    def auth
-      Auth.decode(token)
+    def context
+      {
+        # session: session,
+        # current_user: current_user
+        current_user: AuthToken.user_from_token(request.env.fetch("HTTP_AUTHORIZATION", ""))
+      }
     end
 
     def handle_error_in_development(e)

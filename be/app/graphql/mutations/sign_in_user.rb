@@ -18,7 +18,7 @@ module Mutations
       return unless user
       return unless user.authenticate(credentials[:password])
 
-      jwt = Auth.issue({ user: user.id })
+      jwt = AuthToken.issue({ user: user.id })
 
       { user: user, token: jwt }
     end
