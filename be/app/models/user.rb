@@ -14,4 +14,10 @@ class User < ApplicationRecord
 
   # define callbacks by callback_object when loaded
   encrypt_attributes :phone_number
+
+  # メソッド名は対応づけるドメインモデルのモジュール名などを使う
+  def user_mapper
+    # 復元する(集約を返す, active_recordの使用OK)
+    UserModule::UserEntity.new(self)
+  end
 end
