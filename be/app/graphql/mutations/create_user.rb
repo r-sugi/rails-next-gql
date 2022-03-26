@@ -11,14 +11,26 @@ module Mutations
     field :user, Types::UserType, null: false
 
     def resolve(name: nil, auth_provider: nil)
-      user = User.create(
+      result = UserCreateService.call(
         name: name,
         email: auth_provider&.[](:credentials)&.[](:email),
         password: auth_provider&.[](:credentials)&.[](:password)
       )
-      {
-        user: user
-      }
+
+      if result[:valid]
+        result[:user]
+      else
+        build_errors(result[:user])
+        nil
+      end
+    end
+
+    # TODO: 共通化
+    def build_errors(record)
+      record.errors.map do |attribute, message|
+        message = record[attribute] + " " + message
+        context.add_error(ValidationError.new(message: message, attribute: attribute))
+      end
     end
   end
 end
